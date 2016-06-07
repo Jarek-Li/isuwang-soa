@@ -47,7 +47,7 @@ import com.isuwang.org.apache.thrift.TException;
  *     System.out.println(service2.getTemperature());<br/>
  * </code></blockquote>
  *
- * @see TProtocolDecorator
+ * @see org.apache.thrift.protocol.TProtocolDecorator
  */
 public class TMultiplexedProtocol extends TProtocolDecorator {
 

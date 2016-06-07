@@ -17,29 +17,27 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+package org.apache.thrift.transport;
 
-/**
- * Generic exception class for Thrift.
- *
+/*
+ * This exception is used to track exceptions in TSaslTransport
+ * that does not have Sasl signature in their stream.
  */
-public class TException extends Exception {
+public class TSaslTransportException extends TTransportException {
 
-  private static final long serialVersionUID = 1L;
-
-  public TException() {
+  public TSaslTransportException() {
     super();
   }
 
-  public TException(String message) {
+  public TSaslTransportException(String message) {
     super(message);
   }
 
-  public TException(Throwable cause) {
+  public TSaslTransportException(Throwable cause) {
     super(cause);
   }
 
-  public TException(String message, Throwable cause) {
+  public TSaslTransportException(String message, Throwable cause) {
     super(message, cause);
   }
 }

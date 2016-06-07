@@ -17,29 +17,15 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+package org.apache.thrift.meta_data;
 
-/**
- * Generic exception class for Thrift.
- *
- */
-public class TException extends Exception {
+import org.apache.thrift.TBase;
 
-  private static final long serialVersionUID = 1L;
-
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
+public class StructMetaData extends FieldValueMetaData {
+  public final Class<? extends TBase> structClass;
+  
+  public StructMetaData(byte type, Class<? extends TBase> sClass){
+    super(type);
+    this.structClass = sClass;
+  }    
 }

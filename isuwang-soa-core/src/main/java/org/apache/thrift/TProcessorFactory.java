@@ -17,29 +17,27 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+package org.apache.thrift;
+
+import org.apache.thrift.transport.TTransport;
 
 /**
- * Generic exception class for Thrift.
- *
+ * The default processor factory just returns a singleton
+ * instance.
  */
-public class TException extends Exception {
+public class TProcessorFactory {
 
-  private static final long serialVersionUID = 1L;
+  private final TProcessor processor_;
 
-  public TException() {
-    super();
+  public TProcessorFactory(TProcessor processor) {
+    processor_ = processor;
   }
 
-  public TException(String message) {
-    super(message);
+  public TProcessor getProcessor(TTransport trans) {
+    return processor_;
   }
 
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
+  public boolean isAsyncProcessor() {
+      return processor_ instanceof TAsyncProcessor;
   }
 }

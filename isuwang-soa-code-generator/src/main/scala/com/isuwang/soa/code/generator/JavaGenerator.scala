@@ -71,6 +71,14 @@ class JavaGenerator extends CodeGenerator {
           domainWriter.write(domainTemplate.toString)
           domainWriter.close()
           println(s"生成struct:${struct.name}.java 完成")
+
+          println(s"生成struct:${struct.name}NoOptional.java")
+          val domainTemplateNoOptional = new StringTemplate(toDomainTemplateNoOptional(struct))
+          val domainWriterNoOptional = new PrintWriter(new File(rootDir(outDir, struct.getNamespace + "NoOptional"), s"${struct.name}NoOptional.java"), "UTF-8")
+          domainWriterNoOptional.write(domainTemplateNoOptional.toString)
+          domainWriterNoOptional.close()
+          println(s"生成struct:${struct.name}NoOptional.java 完成")
+
         }
         }
       }
@@ -307,6 +315,42 @@ class JavaGenerator extends CodeGenerator {
 
           return stringBuilder.toString();
         </block>
+      </block>
+      </div>
+    }
+  }
+
+  private def toDomainTemplateNoOptional(struct: Struct): Elem = {
+    return {
+      <div>package {struct.namespace};
+
+        import java.util.Optional;
+
+        /**
+        *{struct.doc}
+        **/
+        public class {struct.name}NoOptional<block>
+        {toFieldArrayBuffer(struct.getFields).map{(field : Field) =>{
+          <div>
+            /**
+            *{field.doc}
+            **/
+            public {toDataTypeTemplate(field.getDataType)} {field.name} ;
+            public {toDataTypeTemplate(field.getDataType)} get{field.name.charAt(0).toUpper + field.name.substring(1)}()<block> return this.{field.name}; </block>
+            public void set{field.name.charAt(0).toUpper + field.name.substring(1)}({toDataTypeTemplate(field.getDataType)} {field.name})<block> this.{field.name} = {field.name}; </block>
+
+            {if(field.dataType.kind == DataType.KIND.BOOLEAN) <div>public {toDataTypeTemplate(field.getDataType)} is{field.name.charAt(0).toUpper + field.name.substring(1)}() <block>
+            return this.{field.name};
+          </block></div>}
+          </div>
+        }
+        }
+        }
+
+        public static {struct.name}NoOptional copy(Object obj)<block>
+           return com.isuwang.scala.dbc.utils.ThriftBeanConverter.copy(obj, {struct.name}NoOptional.class);
+        </block>
+
       </block>
       </div>
     }

@@ -17,29 +17,17 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+package org.apache.thrift.transport;
 
-/**
- * Generic exception class for Thrift.
- *
- */
-public class TException extends Exception {
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
 
-  private static final long serialVersionUID = 1L;
+public interface TSeekableFile {
 
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
+  public InputStream getInputStream() throws IOException;
+  public OutputStream getOutputStream() throws IOException;
+  public void close() throws IOException;
+  public long length() throws IOException;
+  public void seek(long pos) throws IOException;
 }

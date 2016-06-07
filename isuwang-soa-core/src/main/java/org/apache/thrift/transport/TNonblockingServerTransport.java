@@ -17,29 +17,15 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+
+package org.apache.thrift.transport;
+
+import java.nio.channels.Selector;
 
 /**
- * Generic exception class for Thrift.
- *
+ * Server transport that can be operated in a nonblocking fashion.
  */
-public class TException extends Exception {
+public abstract class TNonblockingServerTransport extends TServerTransport {
 
-  private static final long serialVersionUID = 1L;
-
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
+  public abstract void registerSelector(Selector selector);
 }

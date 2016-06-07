@@ -17,29 +17,10 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
-
 /**
- * Generic exception class for Thrift.
- *
+ * Interface for storing server's connection context
  */
-public class TException extends Exception {
+ 
+package org.apache.thrift.server;
 
-  private static final long serialVersionUID = 1L;
-
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
-}
+public interface ServerContext {}

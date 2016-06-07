@@ -16,30 +16,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.thrift;
 
-package com.isuwang.org.apache.thrift;
+import org.apache.thrift.protocol.*;
 
-/**
- * Generic exception class for Thrift.
- *
- */
-public class TException extends Exception {
+import org.apache.thrift.server.AbstractNonblockingServer.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-  private static final long serialVersionUID = 1L;
+import java.util.Collections;
+import java.util.Map;
 
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
+public interface TAsyncProcessor {
+    /**
+     * Implementations must call fb.responseReady() once processing is complete
+     */
+    public boolean process(final AsyncFrameBuffer fb) throws TException;
 }

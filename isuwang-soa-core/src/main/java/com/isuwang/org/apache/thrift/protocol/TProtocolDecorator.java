@@ -32,7 +32,7 @@ import java.nio.ByteBuffer;
  *
  * <p>See p.175 of Design Patterns (by Gamma et al.)</p>
  * 
- * @see TMultiplexedProtocol
+ * @see org.apache.thrift.protocol.TMultiplexedProtocol
  */
 public abstract class TProtocolDecorator extends TProtocol {
 

@@ -17,29 +17,15 @@
  * under the License.
  */
 
-package com.isuwang.org.apache.thrift;
+package org.apache.thrift.meta_data;
 
-/**
- * Generic exception class for Thrift.
- *
- */
-public class TException extends Exception {
+import org.apache.thrift.TEnum;
 
-  private static final long serialVersionUID = 1L;
-
-  public TException() {
-    super();
-  }
-
-  public TException(String message) {
-    super(message);
-  }
-
-  public TException(Throwable cause) {
-    super(cause);
-  }
-
-  public TException(String message, Throwable cause) {
-    super(message, cause);
-  }
+public class EnumMetaData extends FieldValueMetaData {
+  public final Class<? extends TEnum> enumClass;
+  
+  public EnumMetaData(byte type, Class<? extends TEnum> sClass){
+    super(type);
+    this.enumClass = sClass;
+  }    
 }
