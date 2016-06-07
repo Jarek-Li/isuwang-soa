@@ -25,33 +25,35 @@ import com.isuwang.org.apache.thrift.TException;
  * <code>TMultiplexedProtocol</code> is a protocol-independent concrete decorator
  * that allows a Thrift client to communicate with a multiplexing Thrift server,
  * by prepending the service name to the function name during function calls.
- *
+ * <p>
  * <p>NOTE: THIS IS NOT USED BY SERVERS.  On the server, use {@link org.apache.thrift.TMultiplexedProcessor TMultiplexedProcessor} to handle requests
  * from a multiplexing client.
- *
+ * <p>
  * <p>This example uses a single socket transport to invoke two services:
- *
+ * <p>
  * <blockquote><code>
- *     TSocket transport = new TSocket("localhost", 9090);<br/>
- *     transport.open();<br/>
- *<br/>
- *     TBinaryProtocol protocol = new TBinaryProtocol(transport);<br/>
- *<br/>
- *     TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "Calculator");<br/>
- *     Calculator.Client service = new Calculator.Client(mp);<br/>
- *<br/>
- *     TMultiplexedProtocol mp2 = new TMultiplexedProtocol(protocol, "WeatherReport");<br/>
- *     WeatherReport.Client service2 = new WeatherReport.Client(mp2);<br/>
- *<br/>
- *     System.out.println(service.add(2,2));<br/>
- *     System.out.println(service2.getTemperature());<br/>
+ * TSocket transport = new TSocket("localhost", 9090);<br/>
+ * transport.open();<br/>
+ * <br/>
+ * TBinaryProtocol protocol = new TBinaryProtocol(transport);<br/>
+ * <br/>
+ * TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "Calculator");<br/>
+ * Calculator.Client service = new Calculator.Client(mp);<br/>
+ * <br/>
+ * TMultiplexedProtocol mp2 = new TMultiplexedProtocol(protocol, "WeatherReport");<br/>
+ * WeatherReport.Client service2 = new WeatherReport.Client(mp2);<br/>
+ * <br/>
+ * System.out.println(service.add(2,2));<br/>
+ * System.out.println(service2.getTemperature());<br/>
  * </code></blockquote>
  *
- * @see org.apache.thrift.protocol.TProtocolDecorator
+ * @see com.isuwang.org.apache.thrift.protocol.TProtocolDecorator
  */
 public class TMultiplexedProtocol extends TProtocolDecorator {
 
-    /** Used to delimit the service name from the function name */
+    /**
+     * Used to delimit the service name from the function name
+     */
     public static final String SEPARATOR = ":";
 
     private final String SERVICE_NAME;
@@ -62,7 +64,7 @@ public class TMultiplexedProtocol extends TProtocolDecorator {
      * prepended to the message header so that the multiplexing server can broker
      * the function call to the proper service.
      *
-     * @param protocol Your communication protocol of choice, e.g. <code>TBinaryProtocol</code>.
+     * @param protocol    Your communication protocol of choice, e.g. <code>TBinaryProtocol</code>.
      * @param serviceName The service name of the service communicating via this protocol.
      */
     public TMultiplexedProtocol(TProtocol protocol, String serviceName) {

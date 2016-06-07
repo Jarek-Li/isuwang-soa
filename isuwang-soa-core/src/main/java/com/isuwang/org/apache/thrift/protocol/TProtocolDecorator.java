@@ -29,10 +29,10 @@ import java.nio.ByteBuffer;
  * concrete decorator subclasses.  While it has no abstract methods, it
  * is marked abstract as a reminder that by itself, it does not modify
  * the behaviour of the enclosed <code>TProtocol</code>.
- *
+ * <p>
  * <p>See p.175 of Design Patterns (by Gamma et al.)</p>
- * 
- * @see org.apache.thrift.protocol.TMultiplexedProtocol
+ *
+ * @see com.isuwang.org.apache.thrift.protocol.TMultiplexedProtocol
  */
 public abstract class TProtocolDecorator extends TProtocol {
 
@@ -40,6 +40,7 @@ public abstract class TProtocolDecorator extends TProtocol {
 
     /**
      * Encloses the specified protocol.
+     *
      * @param protocol All operations will be forward to this protocol.  Must be non-null.
      */
     public TProtocolDecorator(TProtocol protocol) {
